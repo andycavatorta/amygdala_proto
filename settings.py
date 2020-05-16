@@ -13,11 +13,11 @@ foo = ClassFoo(reports.foo_config)
 
 class Network():
     controller_hostname="FERAL"
-    discovery_multicastGroup = "224.3.29.71"
-    discovery_multicastPort = 10020
-    discovery_responsePort = 10021
-    pubsub_pubPort = 10022
-    pubsub_pubPort2 = 10024
+    discovery_multicast_group = "224.3.29.71"
+    discovery_multicast_port = 10020
+    discovery_response_port = 10021
+    pubsub_pub_port = 10022
+    pubsub_pub_port2 = 10024
 
 class Reporting():
     app_name = "amygdala"
