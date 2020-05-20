@@ -18,7 +18,6 @@ class Roles():
         "amygdala":"sliders"
     }
 
-
 class Reporting():
     app_name = "amygdala"
     #level = "ERROR" #[DEBUG | INFO | WARNING | ERROR | CRITICAL]
