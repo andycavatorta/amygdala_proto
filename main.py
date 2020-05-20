@@ -14,5 +14,5 @@ tb = thirtybirds.Thirtybirds(settings, app_path)
 tb.connection.subscribe_to_topic("test")
 
 while True:
-    tb.connection.send("test","asdf")
+    tb.connection.send("test",{"a":1,"b":2})
     time.sleep(10)
