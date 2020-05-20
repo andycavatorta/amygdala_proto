@@ -21,12 +21,22 @@ class Network():
 
 class Reporting():
     app_name = "amygdala"
-    level = "ERROR" #[DEBUG | INFO | WARNING | ERROR | CRITICAL]
-    print_to_stdout = True
-    log_to_file = True
+    #level = "ERROR" #[DEBUG | INFO | WARNING | ERROR | CRITICAL]
+    #log_to_file = True
+    #print_to_stdout = True
     publish_to_dash = True
+    
+    class Status_Types:
+        EXCEPTIONS = True
+        INITIALIZATIONS = True
+        NETWORK_CONNECTIONS = True
+        NETWORK_MESSAGES = True
+        SYSTEM_STATUS = True
+        VERSION_STATUS = True
+        ADAPTER_STATUS = True
 
 class Version_Control():
+    update_on_start = False
     github_repo_owner = "andycavatorta"
     github_repo_name = "amygdala"
     branch = "master"
