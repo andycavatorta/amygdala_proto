@@ -21,4 +21,4 @@ while True:
     time.sleep(2)
     
     #tb.connection.send("test")
-    #tb.connection.send("test",{"a":1,"b":2})
+    tb.connection.send("test",{"a":1,"b":2})
