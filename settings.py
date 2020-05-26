@@ -41,11 +41,11 @@ class Version_Control():
     branch = "master"
 
 class Roboteq:
-    "boards":{
+    "boards"={
         "300:1058:3014688:1429493507:540422710":{},
         "300:1058:2031663:1429493506:540422710":{},
-    },
-    "motors":{
+    }
+    "motors"={
         "pitch_slider":{
             "mcu_id":"300:1058:2031663:1429493506:540422710",
             "channel":"1",
