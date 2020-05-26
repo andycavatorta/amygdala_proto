@@ -8,11 +8,22 @@ sys.path.append(os.path.split(app_path)[0])
 import settings
 from thirtybirds3 import thirtybirds
 
-#ref can be used to access internals when using interactive mode
-tb = thirtybirds.Thirtybirds(settings, app_path)
-#tb.init()
+def network_message_handler(topic, message):
+    print("network_message_handler",topic, message)
 
-tb.connection.subscribe_to_topic("test")
+def exception_handler(exception):
+    print("exception_handler",exception)
+
+def network_status_change_handler(online_status):
+    print("network_status_change_handler",online_status)
+
+#ref can be used to access internals when using interactive mode
+tb = thirtybirds.Thirtybirds(
+    settings, app_path
+)
+tb.init()
+
+tb.subscribe_to_topic("test")
 
 while True:
     #print(tb.connection.check_connections())
@@ -21,4 +32,4 @@ while True:
     time.sleep(2)
     
     #tb.connection.send("test")
-    tb.connection.send("test",{"a":1,"b":2})
+    tb.publish("test",{"a":1,"b":2})
