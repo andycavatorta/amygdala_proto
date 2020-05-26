@@ -2,11 +2,12 @@ import importlib
 import os
 import sys
 import time
-from adapters.actuators import roboteq_command_wrapper
 
 app_path = os.path.dirname((os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
 print(app_path)
 sys.path.append(os.path.split(app_path)[0])
+
+from adapters.actuators import roboteq_command_wrapper
 
 import settings
 from thirtybirds3 import thirtybirds
