@@ -4,13 +4,11 @@ import sys
 import time
 
 app_path = os.path.dirname((os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
-print(app_path)
 sys.path.append(os.path.split(app_path)[0])
-
-from thirtybirds3.adapters.actuators import roboteq_command_wrapper
 
 import settings
 from thirtybirds3 import thirtybirds
+from thirtybirds3.adapters.actuators import roboteq_command_wrapper
 
 def network_message_handler(topic, message):
     print("network_message_handler",topic, message)
@@ -28,4 +26,18 @@ tb = thirtybirds.Thirtybirds(
     network_status_change_handler,
     exception_handler
 )
+
+
+print(settings.Roboteq.BOARDS)
+print(settings.Roboteq.MOTORS)
+
+
+"""
+controllers = roboteq_command_wrapper.init(
+    data_receiver.add_to_queue, 
+    status_receiver.add_to_queue, 
+    exception_receiver.add_to_queue, 
+    config
+)
+"""
 
