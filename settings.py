@@ -40,6 +40,27 @@ class Version_Control():
     github_repo_name = "amygdala"
     branch = "master"
 
-
-
+class Roboteq:
+    "boards":{
+        "300:1058:3014688:1429493507:540422710":{},
+        "300:1058:2031663:1429493506:540422710":{},
+    },
+    "motors":{
+        "pitch_slider":{
+            "mcu_id":"300:1058:2031663:1429493506:540422710",
+            "channel":"1",
+        },
+        "bow_position_slider":{
+            "mcu_id":"300:1058:2031663:1429493506:540422710",
+            "channel":"2",
+        },
+        "bow_height":{
+            "mcu_id":"300:1058: 3014688:1429493507:540422710",
+            "channel":"1",
+        },
+        "bow_rotation":{
+            "mcu_id":"300:1058:3014688:1429493507:540422710",
+            "channel":"2",
+        }
+    }
 

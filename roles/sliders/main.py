@@ -2,7 +2,7 @@ import importlib
 import os
 import sys
 import time
-
+from adapters.actuators import roboteq_command_wrapper
 
 app_path = os.path.dirname((os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
 print(app_path)
@@ -27,5 +27,4 @@ tb = thirtybirds.Thirtybirds(
     network_status_change_handler,
     exception_handler
 )
-#tb.init()
 
