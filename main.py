@@ -19,7 +19,11 @@ def network_status_change_handler(online_status):
 
 #ref can be used to access internals when using interactive mode
 tb = thirtybirds.Thirtybirds(
-    settings, app_path
+    settings, 
+    app_path,
+    network_message_handler,
+    network_status_change_handler,
+    exception_handler
 )
 tb.init()
 
