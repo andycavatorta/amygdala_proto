@@ -26,6 +26,10 @@ tb = thirtybirds.Thirtybirds(
     network_message_handler,
     network_status_change_handler,
     exception_handler
-)
-#tb.init()
+).api
+
+print(tb.get_hostname())
+
+
+
 

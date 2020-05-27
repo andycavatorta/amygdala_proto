@@ -28,16 +28,28 @@ tb = thirtybirds.Thirtybirds(
 )
 
 
-print(settings.Roboteq.BOARDS)
-print(settings.Roboteq.MOTORS)
+class Roboteq_Data_Receiver(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.queue = queue.Queue()
+        self.start()
 
+    def add_to_queue(self, message):
+        self.queue.put(message)
 
-"""
-controllers = roboteq_command_wrapper.init(
-    data_receiver.add_to_queue, 
-    status_receiver.add_to_queue, 
-    exception_receiver.add_to_queue, 
-    config
+    def run(self):
+        while True:
+            message = self.queue.get(True)
+            print("data",message)
+
+roboteq_data_receiver = Roboteq_Data_Receiver()
+
+controllers = roboteq_command_wrapper.Controllers(
+    roboteq_data_receiver.add_to_queue, 
+    tb.status_receiver, 
+    tb.exception_receiver, 
+    settings.Roboteq.BOARDS,
+    settings.Roboteq.MOTORS
 )
-"""
+
 
