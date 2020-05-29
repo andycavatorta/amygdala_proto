@@ -56,11 +56,16 @@ controllers = roboteq_command_wrapper.Controllers(
 
 
 
-print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(100))
-time.sleep(5)
+time.sleep(10)
+print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200))
+print(controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200))
+time.sleep(10)
+print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200))
+print(controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200))
+time.sleep(10)
+print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(-200))
+print(controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(-200))
+time.sleep(10)
 print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(0))
-time.sleep(5)
-print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(100))
-time.sleep(5)
-print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(0))
+print(controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(0))
 
