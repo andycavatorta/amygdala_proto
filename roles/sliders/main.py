@@ -56,16 +56,26 @@ controllers = roboteq_command_wrapper.Controllers(
 
 
 
+
+
+controllers.motors["bow_height"].set_operating_mode(0)
+controllers.motors["bow_rotation"].set_operating_mode(0)
+        
+
+
+
+
+
 time.sleep(10)
-print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200))
-print(controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200))
+controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200)
+controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200)
 time.sleep(10)
-print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200))
-print(controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200))
+controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200)
+controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200)
 time.sleep(10)
-print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(-200))
-print(controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(-200))
+controllers.motors["pitch_slider"].go_to_speed_or_relative_position(-200)
+controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(-200)
 time.sleep(10)
-print(controllers.motors["pitch_slider"].go_to_speed_or_relative_position(0))
-print(controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(0))
+controllers.motors["pitch_slider"].go_to_speed_or_relative_position(0)
+controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(0)
 
