@@ -58,7 +58,7 @@ controllers = roboteq_command_wrapper.Controllers(
 
 time.sleep(10)
 for board_name in controllers.boards:
-    controllers.boards[board_name].read_mixed_mode()
+    print(controllers.boards[board_name])
 
 """
 controllers.motors["pitch_slider"].set_encoder_counter(00)
