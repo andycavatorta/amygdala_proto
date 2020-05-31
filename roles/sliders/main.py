@@ -54,13 +54,11 @@ controllers = roboteq_command_wrapper.Controllers(
     settings.Roboteq.MOTORS
 )
 
-
-
+"""
 time.sleep(10)
 for board_name in controllers.boards:
     print(controllers.boards[board_name].read_mixed_mode())
 
-"""
 controllers.motors["pitch_slider"].set_encoder_counter(00)
 controllers.motors["bow_position_slider"].set_encoder_counter(-100)
 controllers.motors["bow_height"].set_encoder_counter(100)
