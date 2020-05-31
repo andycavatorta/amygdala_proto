@@ -54,7 +54,7 @@ controllers = roboteq_command_wrapper.Controllers(
     settings.Roboteq.MOTORS
 )
 
-time.sleep(10)
+#time.sleep(10)
 print(controllers.boards)
 for board_name in controllers.boards:
     print(controllers.boards[board_name].read_mixed_mode())
