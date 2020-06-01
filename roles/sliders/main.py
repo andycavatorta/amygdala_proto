@@ -55,10 +55,10 @@ controllers = roboteq_command_wrapper.Controllers(
     settings.Roboteq.MOTORS
 )
 
-
-
-
 def do_tests():
+
+    for board_name in controllers.boards:
+        controllers.boards[board_name].set_serial_data_watchdog(0)
     controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200)
     controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200)
     controllers.motors["bow_height"].go_to_speed_or_relative_position(200)
