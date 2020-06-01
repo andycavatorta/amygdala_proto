@@ -60,7 +60,7 @@ for board_name in controllers.boards:
     print(controllers.boards[board_name].read_mixed_mode())
 
 
-
+time.sleep(10)
 controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200)
 controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200)
 controllers.motors["bow_height"].go_to_speed_or_relative_position(200)
