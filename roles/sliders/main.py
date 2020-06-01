@@ -42,6 +42,8 @@ class Roboteq_Data_Receiver(threading.Thread):
         while True:
             message = self.queue.get(True)
             print("data",message)
+            if "internal_event" in message:
+                do_tests()
 
 roboteq_data_receiver = Roboteq_Data_Receiver()
 
@@ -53,29 +55,34 @@ controllers = roboteq_command_wrapper.Controllers(
     settings.Roboteq.MOTORS
 )
 
+
+
+
+def do_tests(){
+    controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200)
+    controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200)
+    controllers.motors["bow_height"].go_to_speed_or_relative_position(200)
+    controllers.motors["bow_rotation"].go_to_speed_or_relative_position(200)
+    time.sleep(5)
+    controllers.motors["pitch_slider"].go_to_speed_or_relative_position(00)
+    controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(00)
+    controllers.motors["bow_height"].go_to_speed_or_relative_position(00)
+    controllers.motors["bow_rotation"].go_to_speed_or_relative_position(00)
+    time.sleep(5)
+    controllers.motors["pitch_slider"].go_to_speed_or_relative_position(-200)
+    controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(-200)
+    controllers.motors["bow_height"].go_to_speed_or_relative_position(-200)
+    controllers.motors["bow_rotation"].go_to_speed_or_relative_position(-200)
+    time.sleep(5)
+    controllers.motors["pitch_slider"].go_to_speed_or_relative_position(00)
+    controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(00)
+    controllers.motors["bow_height"].go_to_speed_or_relative_position(0)
+    controllers.motors["bow_rotation"].go_to_speed_or_relative_position(0)
+    time.sleep(5)
+}
 #time.sleep(10)
-print(controllers.boards)
-for board_name in controllers.boards:
-    print(controllers.boards[board_name].read_mixed_mode())
+#print(controllers.boards)
+#for board_name in controllers.boards:
+#    print(controllers.boards[board_name].read_mixed_mode())
 
 
-controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200)
-controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200)
-controllers.motors["bow_height"].go_to_speed_or_relative_position(200)
-controllers.motors["bow_rotation"].go_to_speed_or_relative_position(200)
-time.sleep(5)
-controllers.motors["pitch_slider"].go_to_speed_or_relative_position(00)
-controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(00)
-controllers.motors["bow_height"].go_to_speed_or_relative_position(00)
-controllers.motors["bow_rotation"].go_to_speed_or_relative_position(00)
-time.sleep(5)
-controllers.motors["pitch_slider"].go_to_speed_or_relative_position(-200)
-controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(-200)
-controllers.motors["bow_height"].go_to_speed_or_relative_position(-200)
-controllers.motors["bow_rotation"].go_to_speed_or_relative_position(-200)
-time.sleep(5)
-controllers.motors["pitch_slider"].go_to_speed_or_relative_position(00)
-controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(00)
-controllers.motors["bow_height"].go_to_speed_or_relative_position(0)
-controllers.motors["bow_rotation"].go_to_speed_or_relative_position(0)
-time.sleep(5)
