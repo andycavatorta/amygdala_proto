@@ -42,25 +42,37 @@ class Version_Control():
 
 class Roboteq:
     BOARDS = {
-        "300:1058:3014688:1429493507:540422710":{},
-        "300:1058:2031663:1429493506:540422710":{},
+        "sliders":{
+            "mcu_id":"300:1058:3014688:1429493507:540422710"
+        },
+        "bow":{
+            "mcu_id":"300:1058:2031663:1429493506:540422710"
+        }
     }
     MOTORS = {
         "pitch_slider":{
             "mcu_id":"300:1058:3014688:1429493507:540422710",
             "channel":"1",
+            "limit_switch_pin":14,
+            "limit_switch_direction":1,
         },
         "bow_position_slider":{
             "mcu_id":"300:1058:3014688:1429493507:540422710",
             "channel":"2",
+            "limit_switch_pin":15,
+            "limit_switch_direction":1,
         },
         "bow_height":{
             "mcu_id":"300:1058:2031663:1429493506:540422710",
             "channel":"1",
+            "limit_switch_pin":14,
+            "limit_switch_direction":1,
         },
         "bow_rotation":{
             "mcu_id":"300:1058:2031663:1429493506:540422710",
             "channel":"2",
+            "limit_switch_pin":15,
+            "limit_switch_direction":1,
         }
     }
 
