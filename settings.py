@@ -65,14 +65,12 @@ class Roboteq:
         "bow_height":{
             "mcu_id":"300:1058:2031663:1429493506:540422710",
             "channel":"1",
-            "limit_switch_pin":14,
+            "limit_switch_pin":23,
             "limit_switch_direction":1,
         },
         "bow_rotation":{
             "mcu_id":"300:1058:2031663:1429493506:540422710",
             "channel":"2",
-            "limit_switch_pin":15,
-            "limit_switch_direction":1,
         }
     }
 
