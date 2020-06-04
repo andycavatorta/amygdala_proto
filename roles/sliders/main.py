@@ -56,7 +56,10 @@ controllers = roboteq_command_wrapper.Controllers(
 )
 
 def do_tests():
-    print("-----------2")
+
+    controllers.macros["pitch_slider"].go_to_limit_switch()
+
+    """
     for board_name in controllers.boards:
         controllers.boards[board_name].set_serial_data_watchdog(0)
     controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200)
@@ -79,7 +82,7 @@ def do_tests():
     controllers.motors["bow_height"].go_to_speed_or_relative_position(0)
     controllers.motors["bow_rotation"].go_to_speed_or_relative_position(0)
     time.sleep(5)
-
+    """
 #time.sleep(10)
 #print(controllers.boards)
 #for board_name in controllers.boards:
