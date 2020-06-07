@@ -48,7 +48,6 @@ class Roboteq_Data_Receiver(threading.Thread):
 roboteq_data_receiver = Roboteq_Data_Receiver()
 
 
-print(time.time())
 controllers = roboteq_command_wrapper.Controllers(
     roboteq_data_receiver.add_to_queue, 
     tb.status_receiver, 
@@ -56,7 +55,9 @@ controllers = roboteq_command_wrapper.Controllers(
     settings.Roboteq.BOARDS,
     settings.Roboteq.MOTORS
 )
-print(time.time())
+
+controllers.macros["pitch_slider"].go_to_limit_switch()
+
 
 def do_tests():
 
