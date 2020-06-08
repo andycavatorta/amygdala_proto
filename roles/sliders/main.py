@@ -56,10 +56,10 @@ controllers = roboteq_command_wrapper.Controllers(
     settings.Roboteq.MOTORS
 )
 
-time.sleep(5)
-controllers.macros["pitch_slider"].go_to_limit_switch()
-controllers.macros["bow_position_slider"].go_to_limit_switch()
-controllers.macros["bow_height"].go_to_limit_switch()
+time.sleep(2)
+controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
+controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
+controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
 
 def do_tests():
