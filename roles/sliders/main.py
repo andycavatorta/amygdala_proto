@@ -56,7 +56,7 @@ controllers = roboteq_command_wrapper.Controllers(
     settings.Roboteq.MOTORS
 )
 
-
+time.sleep(5)
 controllers.macros["pitch_slider"].go_to_limit_switch()
 
 
