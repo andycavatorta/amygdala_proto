@@ -58,6 +58,8 @@ controllers = roboteq_command_wrapper.Controllers(
 
 time.sleep(5)
 controllers.macros["pitch_slider"].go_to_limit_switch()
+controllers.macros["bow_position_slider"].go_to_limit_switch()
+controllers.macros["bow_height"].go_to_limit_switch()
 
 
 def do_tests():
