@@ -43,10 +43,14 @@ class Version_Control():
 class Roboteq:
     BOARDS = {
         "sliders":{
-            "mcu_id":"300:1058:3014688:1429493507:540422710"
+            "mcu_id":"300:1058:3014688:1429493507:540422710",
+            "serial_data_watchdog":0, #miliseconds
+            "serial_echo":1, #0 = enabled, 1 is disabled
         },
         "bow":{
-            "mcu_id":"300:1058:2031663:1429493506:540422710"
+            "mcu_id":"300:1058:2031663:1429493506:540422710",
+            "serial_data_watchdog":0, #miliseconds
+            "serial_echo":1, #0 = enabled, 1 is disabled
         }
     }
     MOTORS = {
@@ -55,22 +59,54 @@ class Roboteq:
             "channel":"1",
             "limit_switch_pin":14,
             "limit_switch_direction":1,
+            "motor_acceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
+            "motor_deceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
+            "operating_mode":6, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position
+            "pid_differential_gain":25, # 0-255
+            "pid_integral_gain":25, # 0-255
+            "pid_proportional_gain":25, # 0-255
+            "encoder_ppr_value":4000,
+            # todo: more variable names will be added as needed
         },
         "bow_position_slider":{
             "mcu_id":"300:1058:3014688:1429493507:540422710",
             "channel":"2",
             "limit_switch_pin":15,
             "limit_switch_direction":1,
+            "motor_acceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
+            "motor_deceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
+            "operating_mode":6, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position
+            "pid_differential_gain":25, # 0-255
+            "pid_integral_gain":25, # 0-255
+            "pid_proportional_gain":25, # 0-255
+            "encoder_ppr_value":4000,
+            # todo: more variable names will be added as needed
         },
         "bow_height":{
             "mcu_id":"300:1058:2031663:1429493506:540422710",
             "channel":"1",
             "limit_switch_pin":23,
             "limit_switch_direction":1,
+            "motor_acceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
+            "motor_deceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
+            "operating_mode":6, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position
+            "pid_differential_gain":25, # 0-255
+            "pid_integral_gain":25, # 0-255
+            "pid_proportional_gain":25, # 0-255
+            "encoder_ppr_value":4000,
+            # todo: more variable names will be added as needed
         },
         "bow_rotation":{
             "mcu_id":"300:1058:2031663:1429493506:540422710",
             "channel":"2",
+            "motor_acceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
+            "motor_deceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
+            "operating_mode":1, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position
+            "pid_differential_gain":25, # 0-255
+            "pid_integral_gain":25, # 0-255
+            "pid_proportional_gain":25, # 0-255
+            "encoder_ppr_value":4000,
+            # todo: more variable names will be added as needed
         }
     }
 
