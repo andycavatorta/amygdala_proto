@@ -65,7 +65,7 @@ class Roboteq:
             "pid_differential_gain":1, # 0-255
             "pid_integral_gain":1, # 0-255
             "pid_proportional_gain":1, # 0-255
-            "encoder_ppr_value":20000,
+            "encoder_ppr_value":30000,
             # todo: more variable names will be added as needed
         },
         "bow_position_slider":{
