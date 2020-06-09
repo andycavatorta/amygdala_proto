@@ -47,7 +47,6 @@ class Roboteq_Data_Receiver(threading.Thread):
 
 roboteq_data_receiver = Roboteq_Data_Receiver()
 
-
 controllers = roboteq_command_wrapper.Controllers(
     roboteq_data_receiver.add_to_queue, 
     tb.status_receiver, 
@@ -58,9 +57,8 @@ controllers = roboteq_command_wrapper.Controllers(
 
 time.sleep(2)
 controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
-controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
-controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
-
+#controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
+#controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
 def do_tests():
 
