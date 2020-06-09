@@ -56,7 +56,7 @@ controllers = roboteq_command_wrapper.Controllers(
 )
 
 time.sleep(2)
-controllers.macros["pitch_slider"].add_to_queue("go_to_relative_position")
+controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
 #controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
 #controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
