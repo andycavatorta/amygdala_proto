@@ -61,37 +61,3 @@ controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"pos
 #controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
 #controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
-def do_tests():
-
-    controllers.macros["pitch_slider"].go_to_limit_switch()
-
-    """
-    for board_name in controllers.boards:
-        controllers.boards[board_name].set_serial_data_watchdog(0)
-    controllers.motors["pitch_slider"].go_to_speed_or_relative_position(200)
-    controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(200)
-    controllers.motors["bow_height"].go_to_speed_or_relative_position(200)
-    controllers.motors["bow_rotation"].go_to_speed_or_relative_position(200)
-    time.sleep(5)
-    controllers.motors["pitch_slider"].go_to_speed_or_relative_position(00)
-    controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(00)
-    controllers.motors["bow_height"].go_to_speed_or_relative_position(00)
-    controllers.motors["bow_rotation"].go_to_speed_or_relative_position(00)
-    time.sleep(5)
-    controllers.motors["pitch_slider"].go_to_speed_or_relative_position(-200)
-    controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(-200)
-    controllers.motors["bow_height"].go_to_speed_or_relative_position(-200)
-    controllers.motors["bow_rotation"].go_to_speed_or_relative_position(-200)
-    time.sleep(5)
-    controllers.motors["pitch_slider"].go_to_speed_or_relative_position(00)
-    controllers.motors["bow_position_slider"].go_to_speed_or_relative_position(00)
-    controllers.motors["bow_height"].go_to_speed_or_relative_position(0)
-    controllers.motors["bow_rotation"].go_to_speed_or_relative_position(0)
-    time.sleep(5)
-    """
-#time.sleep(10)
-#print(controllers.boards)
-#for board_name in controllers.boards:
-#    print(controllers.boards[board_name].read_mixed_mode())
-
-
