@@ -58,7 +58,7 @@ class Roboteq:
             "mcu_id":"300:1058:3014688:1429493507:540422710",
             "channel":"1",
             "limit_switch_pin":14,
-            "limit_switch_direction":1,
+            "limit_switch_direction":-1,
             "limit_end_position":2300000,
             "motor_acceleration_rate":5000, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
             "motor_deceleration_rate":5000, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
