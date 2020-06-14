@@ -55,12 +55,10 @@ controllers = roboteq_command_wrapper.Controllers(
     settings.Roboteq.MOTORS
 )
 
-time.sleep(2)
 controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
-controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":800000, "speed":100})
-controllers.macros["pitch_slider"].add_to_queue("oscillate", {"distance":500,"frequency":0.5,"duration":10})
+while True:
+    controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":10000, "speed":100})    
+    controllers.macros["pitch_slider"].add_to_queue("go_to_end_position")
 
 
-#controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
-#controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
