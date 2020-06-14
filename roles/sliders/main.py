@@ -57,8 +57,8 @@ controllers = roboteq_command_wrapper.Controllers(
 
 controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
 while True:
+    controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":3000000, "speed":100})  
     controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":10000, "speed":100})    
-    controllers.macros["pitch_slider"].add_to_queue("go_to_end_position")
 
 
 
