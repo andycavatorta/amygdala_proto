@@ -16,6 +16,7 @@ class Roles():
     hosts={
         "FERAL":"controller",
         "amygdala":"sliders"
+        "horsewheel":"horsewheel"
     }
 
 class Reporting():
