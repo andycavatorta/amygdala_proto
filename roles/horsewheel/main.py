@@ -47,6 +47,12 @@ class Roboteq_Data_Receiver(threading.Thread):
 
 roboteq_data_receiver = Roboteq_Data_Receiver()
 
+print(settings.Roboteq.BOARDS["bow"])
+
+print(settings.Roboteq.MOTORS["bow_height"])
+
+print(settings.Roboteq.MOTORS["bow_rotation"])
+
 """
 controllers = roboteq_command_wrapper.Controllers(
     roboteq_data_receiver.add_to_queue, 
