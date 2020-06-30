@@ -47,19 +47,15 @@ class Roboteq_Data_Receiver(threading.Thread):
 
 roboteq_data_receiver = Roboteq_Data_Receiver()
 
-print(settings.Roboteq.BOARDS["bow"])
-
-print(settings.Roboteq.MOTORS["bow_height"])
-
-print(settings.Roboteq.MOTORS["bow_rotation"])
-
-"""
 controllers = roboteq_command_wrapper.Controllers(
     roboteq_data_receiver.add_to_queue, 
     tb.status_receiver, 
     tb.exception_receiver, 
-    settings.Roboteq.BOARDS,
-    settings.Roboteq.MOTORS
+    {"bow":settings.Roboteq.BOARDS["bow"]},
+    {
+        "bow_height":settings.Roboteq.MOTORS["bow_height"],
+        "bow_rotation":settings.Roboteq.MOTORS["bow_rotation"],
+    }
 )
 
 controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
