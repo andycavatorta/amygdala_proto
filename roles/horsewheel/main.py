@@ -57,6 +57,15 @@ controllers = roboteq_command_wrapper.Controllers(
         "bow_rotation":settings.Roboteq.MOTORS["bow_rotation"],
     }
 )
+
+
+controllers.motors["bow_height"].get_encoder_counter_absolute()
+controllers.motors["bow_height"].go_to_speed_or_relative_position(100)
+time.sleep(2)
+controllers.motors["bow_height"].go_to_speed_or_relative_position(0)
+controllers.motors["bow_height"].get_encoder_counter_absolute()
+
+
 """
 controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
 controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":3000000, "speed":100})
