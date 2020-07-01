@@ -51,8 +51,11 @@ controllers = roboteq_command_wrapper.Controllers(
     roboteq_data_receiver.add_to_queue, 
     tb.status_receiver, 
     tb.exception_receiver, 
-    settings.Roboteq.BOARDS,
-    settings.Roboteq.MOTORS
+    {"sliders":settings.Roboteq.BOARDS["sliders"]},
+    {
+        "pitch_slider":settings.Roboteq.MOTORS["pitch_slider"],
+        "bow_position_slider":settings.Roboteq.MOTORS["bow_position_slider"],
+    }
 )
 
 controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
