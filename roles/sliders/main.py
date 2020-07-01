@@ -58,8 +58,8 @@ controllers = roboteq_command_wrapper.Controllers(
     }
 )
 
-controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
-controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":3000000, "speed":100})
+controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
+#controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":3000000, "speed":100})
 #controllers.macros["pitch_slider"].add_to_queue("oscillate", {"distance":500,"frequency":0.5,"duration":10})
 
 
