@@ -74,7 +74,8 @@ class Roboteq:
             "mcu_id":"300:1058:3014688:1429493507:540422710",
             "channel":"2",
             "limit_switch_pin":15,
-            "limit_switch_direction":1,
+            "limit_switch_direction":-1,
+            "limit_end_position":2500000,
             "motor_acceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
             "motor_deceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
             "operating_mode":3, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position
@@ -111,4 +112,3 @@ class Roboteq:
             # todo: more variable names will be added as needed
         }
     }
-
