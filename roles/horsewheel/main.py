@@ -59,11 +59,11 @@ controllers = roboteq_command_wrapper.Controllers(
 )
 
 
-controllers.motors["bow_height"].get_encoder_counter_absolute()
-controllers.motors["bow_height"].go_to_speed_or_relative_position(100)
+controllers.motors["bow_rotation"].get_encoder_counter_absolute()
+controllers.motors["bow_rotation"].go_to_speed_or_relative_position(100)
 time.sleep(2)
-controllers.motors["bow_height"].go_to_speed_or_relative_position(0)
-controllers.motors["bow_height"].get_encoder_counter_absolute()
+controllers.motors["bow_rotation"].go_to_speed_or_relative_position(0)
+controllers.motors["bow_rotation"].get_encoder_counter_absolute()
 
 
 """
