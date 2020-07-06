@@ -92,10 +92,10 @@ class Roboteq:
             "limit_switch_direction":1,
             "motor_acceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
             "motor_deceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
-            "operating_mode":0, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position
-            "pid_differential_gain":1, # 0-255
-            "pid_integral_gain":25, # 0-255
-            "pid_proportional_gain":25, # 0-255
+            "operating_mode":3, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position
+            "pid_differential_gain":25, # 0-255
+            "pid_integral_gain":0, # 0-255
+            "pid_proportional_gain":0, # 0-255
             "encoder_ppr_value":4000,
             # todo: more variable names will be added as needed
         },
