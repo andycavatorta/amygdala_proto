@@ -60,19 +60,19 @@ controllers = roboteq_command_wrapper.Controllers(
 
 
 
-"""
-controllers.macros["bow_rotation"].set_speed(10)
+
+controllers.macros["bow_rotation"].set_speed(15)
+controllers.macros["bow_height"].set_speed(20)
 time.sleep(10)
 controllers.macros["bow_rotation"].coast()
-controllers.macros["bow_rotation"].coast()
-"""
-
-controllers.macros["bow_rotation"].coast()
-controllers.macros["bow_rotation"].coast()
-controllers.macros["bow_height"].set_speed(20)
+time.sleep(5)
+controllers.macros["bow_height"].set_speed(-20)
 time.sleep(5)
 controllers.macros["bow_height"].coast()
 controllers.macros["bow_height"].coast()
+controllers.macros["bow_rotation"].coast()
+controllers.macros["bow_rotation"].coast()
+
 
 #controllers.macros["bow_rotation"].add_to_queue("coast")
 #controllers.macros["bow_rotation"].add_to_queue("coast")
