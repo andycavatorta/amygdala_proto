@@ -67,6 +67,8 @@ controllers.macros["bow_rotation"].coast()
 controllers.macros["bow_rotation"].coast()
 """
 
+controllers.macros["bow_rotation"].coast()
+controllers.macros["bow_rotation"].coast()
 controllers.macros["bow_height"].set_speed(-10)
 time.sleep(2)
 controllers.macros["bow_height"].coast()
