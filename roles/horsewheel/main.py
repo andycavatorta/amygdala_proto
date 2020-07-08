@@ -70,7 +70,7 @@ controllers.macros["bow_rotation"].coast()
 controllers.macros["bow_rotation"].coast()
 controllers.macros["bow_rotation"].coast()
 controllers.macros["bow_height"].set_speed(-10)
-time.sleep(2)
+time.sleep(5)
 controllers.macros["bow_height"].coast()
 controllers.macros["bow_height"].coast()
 
