@@ -95,7 +95,7 @@ class Roboteq:
             "operating_mode":1, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position
             "pid_differential_gain":1, # 0-255
             "pid_integral_gain":200, # 0-255
-            "pid_proportional_gain":300, # 0-255
+            "pid_proportional_gain":200, # 0-255
             "encoder_ppr_value":4000,
             # todo: more variable names will be added as needed
         },
