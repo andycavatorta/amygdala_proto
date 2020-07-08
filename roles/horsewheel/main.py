@@ -59,6 +59,14 @@ controllers = roboteq_command_wrapper.Controllers(
 )
 
 
+
+
+controllers.macros["bow_rotation"].set_speed(10)
+time.sleep(10)
+controllers.macros["bow_rotation"].add_to_queue("coast")
+
+
+
 """
 controllers.motors["bow_rotation"].get_encoder_counter_absolute(True)
 controllers.motors["bow_rotation"].go_to_speed_or_relative_position(7)
