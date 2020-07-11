@@ -29,7 +29,7 @@ class Roboteq_Data_Receiver(threading.Thread):
             #    pass
 
 roboteq_data_receiver = Roboteq_Data_Receiver()
-
+"""
 controllers = roboteq_command_wrapper.Controllers(
     roboteq_data_receiver.add_to_queue, 
     tb.status_receiver, 
@@ -40,7 +40,7 @@ controllers = roboteq_command_wrapper.Controllers(
         "bow_rotation":settings.Roboteq.MOTORS["bow_rotation"],
     }
 )
-
+"""
 class Main(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -52,6 +52,16 @@ class Main(threading.Thread):
             self.exception_handler
         ).api
         self.queue = queue.Queue()
+        self.controllers = roboteq_command_wrapper.Controllers(
+            roboteq_data_receiver.add_to_queue, 
+            self.tb.status_receiver, 
+            self.tb.exception_receiver, 
+            {"bow":settings.Roboteq.BOARDS["bow"]},
+            {
+                "bow_height":settings.Roboteq.MOTORS["bow_height"],
+                "bow_rotation":settings.Roboteq.MOTORS["bow_rotation"],
+            }
+        )
 
         #self.tb.subscribe_to_topic("pitch_slider_position")
         #self.tb.subscribe_to_topic("horsewheel_slider_position")
@@ -81,9 +91,9 @@ class Main(threading.Thread):
                 if topic == "horsewheel_lifter_home":
                     self.tb.publish("horsewheel_lifter_home", True)
                 if topic == "horsewheel_speed":
-                    controllers.macros["bow_rotation"].set_speed(int(message))
+                    self.controllers.macros["bow_rotation"].set_speed(int(message))
                 if topic == "horsewheel_lifter_position":
-                    controllers.macros["bow_height"].go_to_absolute_position(int(message))
+                    self.controllers.macros["bow_height"].go_to_absolute_position(int(message))
 
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
