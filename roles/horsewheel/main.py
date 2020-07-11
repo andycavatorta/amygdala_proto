@@ -50,7 +50,7 @@ class Main(threading.Thread):
             self.network_message_handler,
             self.network_status_change_handler,
             self.exception_handler
-        ).api
+        )
         self.queue = queue.Queue()
         self.controllers = roboteq_command_wrapper.Controllers(
             roboteq_data_receiver.add_to_queue, 
@@ -62,7 +62,6 @@ class Main(threading.Thread):
                 "bow_rotation":settings.Roboteq.MOTORS["bow_rotation"],
             }
         )
-
         #self.tb.subscribe_to_topic("pitch_slider_position")
         #self.tb.subscribe_to_topic("horsewheel_slider_position")
         #self.tb.subscribe_to_topic("pitch_slider_home")
@@ -75,7 +74,6 @@ class Main(threading.Thread):
 
     def status_receiver(self, msg):
         print("status_receiver", msg)
-
     def network_message_handler(self,topic, message):
         print("network_message_handler",topic, message)
         self.add_to_queue(topic, message)
@@ -97,7 +95,6 @@ class Main(threading.Thread):
                     self.controllers.macros["bow_rotation"].set_speed(int(message))
                 if topic == "horsewheel_lifter_position":
                     self.controllers.macros["bow_height"].go_to_absolute_position(int(message))
-
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 print(e, repr(traceback.format_exception(exc_type, exc_value,exc_traceback)))

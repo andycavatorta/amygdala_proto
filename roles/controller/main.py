@@ -17,24 +17,25 @@ from thirtybirds3 import thirtybirds
 class Main(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
-        class states:
+        class States:
             WAITING_FOR_CONNECTIONS = "waiting_for_connections"
             WAITING_FOR_HOMING = "waiting_for_homing"
             READY = "ready" 
+        self.states =States()
         self.tb = thirtybirds.Thirtybirds(
             settings, 
             app_path,
             self.network_message_handler,
             self.network_status_change_handler,
             self.exception_handler
-        ).api
+        )
         self.transport_connected = False
         self.horsewheel_connected = False
 
         self.pitch_slider_home = False
         self.horsewheel_slider_home = False
         self.horsewheel_lifter_home = False
-        self.state = states.WAITING_FOR_CONNECTIONS
+        self.state = self.states.WAITING_FOR_CONNECTIONS
 
         self.queue = queue.Queue()
         self.tb.subscribe_to_topic("transport_connected")
@@ -63,47 +64,46 @@ class Main(threading.Thread):
                 topic, message = self.queue.get(True)
                 print(topic, message)
 
-                if self.state == states.WAITING_FOR_CONNECTIONS:
+                if self.state == self.states.WAITING_FOR_CONNECTIONS:
                     if topic == "transport_present":
                         self.transport_connected = True
                         if self.transport_connected and self.horsewheel_connected:
-                            self.state = states.WAITING_FOR_HOMING
+                            self.state = self.states.WAITING_FOR_HOMING
                             self.tb.publish("pitch_slider_home", False)
                             self.tb.publish("horsewheel_slider_home", False)
                             self.tb.publish("horsewheel_lifter_home", False)
                     if topic == "horsewheel_present":
                         self.horsewheel_connected = True
                         if self.transport_connected and self.horsewheel_connected:
-                            self.state = states.WAITING_FOR_HOMING
+                            self.state = self.states.WAITING_FOR_HOMING
                             self.tb.publish("pitch_slider_home", False)
                             self.tb.publish("horsewheel_slider_home", False)
                             self.tb.publish("horsewheel_lifter_home", False)
 
-                if self.state == states.WAITING_FOR_HOMING:
+                if self.state == self.states.WAITING_FOR_HOMING:
                     if topic == "pitch_slider_home":
                         if message == True:
                             self.pitch_slider_home = True
                             if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
-                                self.state = states.READY
+                                self.state = self.states.READY
                     if topic == "horsewheel_slider_home":
                         if message == True:
                             self.horsewheel_slider_home = True
                             if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
-                                self.state = states.READY
+                                self.state = self.states.READY
                     if topic == "horsewheel_lifter_home":
                         if message == True:
                             self.horsewheel_lifter_home = True
                             if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
-                                self.state = states.READY
+                                self.state = self.states.READY
 
-                if self.state == states.READY:
+                if self.state == self.states.READY:
                     if topic in ["pitch_slider_position","horsewheel_slider_position","horsewheel_speed","horsewheel_lifter_position"]:
                         self.tb.publish(topic, message)
 
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 print(e, repr(traceback.format_exception(exc_type, exc_value,exc_traceback)))
-
 main = Main()
 
 class MIDI(threading.Thread):
@@ -112,7 +112,8 @@ class MIDI(threading.Thread):
         self.start()
 
     def run(self):
-        with mido.open_input("Q25:Q25 MIDI 1 24:0") as inport:
+
+        with mido.open_input("Q25:Q25 MIDI 1 20:0") as inport:
             for midi_o in inport:
                 if midi_o.type == "note_on":
                     if midi_o.note < 59:
