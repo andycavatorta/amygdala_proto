@@ -54,8 +54,8 @@ class Main(threading.Thread):
         self.queue = queue.Queue()
         self.controllers = roboteq_command_wrapper.Controllers(
             roboteq_data_receiver.add_to_queue, 
-            self.tb.status_receiver, 
-            self.tb.exception_receiver, 
+            self.status_receiver, 
+            self.network_status_change_handler, 
             {"bow":settings.Roboteq.BOARDS["bow"]},
             {
                 "bow_height":settings.Roboteq.MOTORS["bow_height"],
@@ -73,12 +73,15 @@ class Main(threading.Thread):
         self.tb.publish("transport_connected", True)
         self.start()
 
-    def network_message_handler(topic, message):
+    def status_receiver(self, msg):
+        print("status_receiver", msg)
+
+    def network_message_handler(self,topic, message):
         print("network_message_handler",topic, message)
         self.add_to_queue(topic, message)
-    def exception_handler(exception):
+    def exception_handler(self, exception):
         print("exception_handler",exception)
-    def network_status_change_handler(online_status):
+    def network_status_change_handler(self,online_status):
         print("network_status_change_handler",online_status)
     def add_to_queue(self, topic, message):
         self.queue.put((topic, message))
