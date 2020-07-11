@@ -14,7 +14,7 @@ foo = ClassFoo(reports.foo_config)
 class Roles():
     controller_hostname="FERAL"
     hosts={
-        "FERAL":"controller",
+        "feral":"controller",
         "transport":"sliders",
         "horsewheel":"horsewheel"
     }
