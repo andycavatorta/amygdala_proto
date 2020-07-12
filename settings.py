@@ -88,9 +88,9 @@ class Roboteq:
         "bow_height":{
             "mcu_id":"300:1058:2031663:1429493506:540422710",
             "channel":"1",
-            "limit_switch_pin":23,
+            "limit_switch_pin":14,
             "limit_switch_direction":1,
-            "limit_end_position":25000,
+            "limit_end_position":400000,
             "motor_acceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
             "motor_deceleration_rate":500, # Min:0, Max:500000, Default: 10000 = 1000.0 RPM/s
             "operating_mode":1, #0: Open-loop,1: Closed-loop speed,2: Closed-loop position relative,3: Closed-loop count position,4: Closed-loop position tracking,5: Torque,6: Closed-loop speed position

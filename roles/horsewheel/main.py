@@ -71,6 +71,7 @@ class Main(threading.Thread):
         self.tb.subscribe_to_topic("horsewheel_lifter_position")
         self.tb.publish("transport_connected", True)
         self.start()
+        self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
     def status_receiver(self, msg):
         print("status_receiver", msg)
@@ -102,6 +103,9 @@ class Main(threading.Thread):
                 print(e, repr(traceback.format_exception(exc_type, exc_value,exc_traceback)))
 
 main = Main()
+
+
+
 
 """
 controllers.macros["bow_height"].set_speed(150)
