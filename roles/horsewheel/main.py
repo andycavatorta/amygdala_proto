@@ -91,7 +91,7 @@ class Main(threading.Thread):
                 print(topic, message)
                 if topic == "horsewheel_lifter_home":
                     self.tb.publish("horsewheel_lifter_home", True)
-                if topic == "horsewheel_speed":
+                if topic == b"horsewheel_speed":
                     self.controllers.macros["bow_rotation"].set_speed(int(message))
                 if topic == "horsewheel_lifter_position":
                     self.controllers.macros["bow_height"].go_to_absolute_position(int(message))

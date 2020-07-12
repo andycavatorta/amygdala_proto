@@ -59,6 +59,7 @@ class Main(threading.Thread):
     def add_to_queue(self, topic, message):
         self.queue.put((topic, message))
     def run(self):
+        self.state = self.states.READY # just for testing
         while True:
             try:
                 topic, message = self.queue.get(True)
@@ -99,6 +100,7 @@ class Main(threading.Thread):
 
                 if self.state == self.states.READY:
                     if topic in ["pitch_slider_position","horsewheel_slider_position","horsewheel_speed","horsewheel_lifter_position"]:
+                        print(topic, message)
                         self.tb.publish(topic, message)
 
             except Exception as e:
