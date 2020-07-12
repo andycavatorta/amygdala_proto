@@ -121,7 +121,7 @@ class MIDI(threading.Thread):
                     if midi_o.note > 59:
                         main.add_to_queue("horsewheel_slider_position", ((midi_o.note-48)*40000)+200000)
                 if midi_o.type == "pitchwheel":
-                    horsewheel_speed = int(midi_o.pitch/100)
+                    horsewheel_speed = int(midi_o.pitch/50)
                     if horsewheel_speed != self.last_horsewheel_speed:
                         self.last_horsewheel_speed = horsewheel_speed
                         main.add_to_queue("horsewheel_speed", horsewheel_speed)
