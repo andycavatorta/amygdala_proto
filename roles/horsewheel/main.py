@@ -73,6 +73,8 @@ class Main(threading.Thread):
         self.start()
         self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
+        self.controllers.macros["bow_height"].go_to_absolute_position({"position":-4000, "speed":100})
+
     def status_receiver(self, msg):
         print("status_receiver", msg)
     def network_message_handler(self,topic, message):
