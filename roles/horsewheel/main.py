@@ -73,7 +73,7 @@ class Main(threading.Thread):
         self.start()
         self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
-        self.controllers.macros["bow_height"].go_to_absolute_position({"position":-40000, "speed":100})
+        #self.controllers.macros["bow_height"].go_to_absolute_position({"position":-40000, "speed":100})
 
     def status_receiver(self, msg):
         print("status_receiver", msg)
@@ -99,7 +99,7 @@ class Main(threading.Thread):
                 if topic == b"horsewheel_lifter_position":
                     print("________", int(message))
                     
-                    self.controllers.macros["bow_height"].go_to_absolute_position({"position":int(message), "speed":100})
+                    self.controllers.macros["bow_height"].go_to_absolute_position({"position":int(-message), "speed":50})
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 print(e, repr(traceback.format_exception(exc_type, exc_value,exc_traceback)))
