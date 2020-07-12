@@ -37,6 +37,7 @@ class Main(threading.Thread):
         self.horsewheel_lifter_home = False
         self.state = self.states.WAITING_FOR_CONNECTIONS
 
+
         self.queue = queue.Queue()
         self.tb.subscribe_to_topic("transport_connected")
         self.tb.subscribe_to_topic("horsewheel_connected")
@@ -63,8 +64,6 @@ class Main(threading.Thread):
         while True:
             try:
                 topic, message = self.queue.get(True)
-                print(topic, message)
-
                 if self.state == self.states.WAITING_FOR_CONNECTIONS:
                     if topic == "transport_present":
                         self.transport_connected = True
@@ -111,10 +110,9 @@ main = Main()
 class MIDI(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
+        self.last_horsewheel_speed = 0
         self.start()
-
     def run(self):
-
         with mido.open_input("Q25:Q25 MIDI 1 20:0") as inport:
             for midi_o in inport:
                 if midi_o.type == "note_on":
@@ -123,7 +121,10 @@ class MIDI(threading.Thread):
                     if midi_o.note > 59:
                         main.add_to_queue("horsewheel_slider_position", ((midi_o.note-48)*40000)+200000)
                 if midi_o.type == "pitchwheel":
-                    main.add_to_queue("horsewheel_speed",int((midi_o.pitch + 8192)/1000))
+                    horsewheel_speed = int(midi_o.pitch/100)
+                    if horsewheel_speed != self.last_horsewheel_speed:
+                        self.last_horsewheel_speed = horsewheel_speed
+                        main.add_to_queue("horsewheel_speed", horsewheel_speed)
                 if midi_o.type == "control_change":
                     main.add_to_queue("horsewheel_lifter_position", midi_o.value)
 midi = MIDI()
