@@ -58,8 +58,8 @@ class Main(threading.Thread):
         self.tb.subscribe_to_topic("horsewheel_slider_home")
         self.tb.publish("transport_connected", True)
         self.start()
-        controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
-        controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
+        self.controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
+        self.controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
 
     def status_receiver(self, msg):
         print("status_receiver", msg)
