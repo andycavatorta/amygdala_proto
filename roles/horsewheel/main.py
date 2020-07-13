@@ -80,8 +80,8 @@ class Main(threading.Thread):
                 if topic == b"horsewheel_speed":
                     self.controllers.macros["bow_rotation"].set_speed(int(message))
                 if topic == b"horsewheel_lifter_position":
-                    self.controllers.motors["bow_height"].set_acceleration(2000)
-                    self.controllers.motors["bow_height"].set_deceleration(2000)
+                    self.controllers.motors["bow_height"].set_acceleration(500)
+                    self.controllers.motors["bow_height"].set_deceleration(500)
                     self.controllers.motors["bow_height"].set_operating_mode(3) 
                     self.controllers.motors["bow_height"].set_motor_speed(600)
                     print("________", int(message))
