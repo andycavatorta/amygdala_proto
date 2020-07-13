@@ -80,10 +80,10 @@ class Main(threading.Thread):
                 print(topic, message)
 
                 if topic == b"pitch_slider_position":
-                    controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":int(message), "speed":100})
+                    self.controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":int(message), "speed":100})
 
                 if topic == b"horsewheel_slider_position":
-                    controllers.macros["bow_position_slider"].add_to_queue("go_to_absolute_position", {"position":int(message), "speed":400})
+                    self.controllers.macros["bow_position_slider"].add_to_queue("go_to_absolute_position", {"position":int(message), "speed":400})
 
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
