@@ -83,7 +83,7 @@ class Main(threading.Thread):
                     self.controllers.motors["bow_height"].set_acceleration(10)
                     self.controllers.motors["bow_height"].set_deceleration(10)
                     self.controllers.motors["bow_height"].set_operating_mode(3) 
-                    self.controllers.motors["bow_height"].set_motor_speed(100)
+                    #self.controllers.motors["bow_height"].set_motor_speed(100)
                     print("________", int(message))
                     self.controllers.motors["bow_height"].go_to_absolute_position(int(-message))
                     #self.controllers.macros["bow_height"].go_to_absolute_position({"position":int(-message), "speed":50})
