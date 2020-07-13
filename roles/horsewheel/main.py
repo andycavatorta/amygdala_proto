@@ -57,7 +57,7 @@ class Main(threading.Thread):
         self.tb.publish("horsewheel_connected", True)
         self.start()
         self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
-        self.controllers.motors["bow_height"].set_operating_mode(2)
+        self.controllers.motors["bow_height"].set_operating_mode(2) 
         #self.controllers.macros["bow_height"].go_to_absolute_position({"position":-40000, "speed":100})
 
     def status_receiver(self, msg):
