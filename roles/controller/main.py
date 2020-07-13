@@ -96,7 +96,6 @@ class Main(threading.Thread):
                             self.horsewheel_lifter_home = True
                             if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
                                 self.state = self.states.READY
-
                 if self.state == self.states.READY:
                     if topic in ["pitch_slider_position","horsewheel_slider_position","horsewheel_speed","horsewheel_lifter_position"]:
                         print(topic, message)
@@ -126,5 +125,5 @@ class MIDI(threading.Thread):
                         self.last_horsewheel_speed = horsewheel_speed
                         main.add_to_queue("horsewheel_speed", horsewheel_speed)
                 if midi_o.type == "control_change":
-                    main.add_to_queue("horsewheel_lifter_position", midi_o.value*4000)
+                    main.add_to_queue("horsewheel_lifter_position", midi_o.value * 5000)
 midi = MIDI()
