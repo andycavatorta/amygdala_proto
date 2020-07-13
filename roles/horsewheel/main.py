@@ -83,7 +83,7 @@ class Main(threading.Thread):
                 if topic == b"horsewheel_lifter_position":
 
                     self.controllers.motors["bow_height"].set_operating_mode(3) 
-                    self.motor.set_motor_speed(50)
+                    self.controllers.motors["bow_height"].set_motor_speed(50)
                     print("________", int(message))
                     self.controllers.motors["bow_height"].go_to_absolute_position(int(-message))
                     #self.controllers.macros["bow_height"].go_to_absolute_position({"position":int(-message), "speed":50})
