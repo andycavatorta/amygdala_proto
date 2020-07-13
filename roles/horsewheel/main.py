@@ -80,8 +80,8 @@ class Main(threading.Thread):
                 if topic == b"horsewheel_speed":
                     self.controllers.macros["bow_rotation"].set_speed(int(message))
                 if topic == b"horsewheel_lifter_position":
-                    self.controllers.motors["bow_height"].set_acceleration(50)
-                    self.controllers.motors["bow_height"].set_deceleration(50)
+                    self.controllers.motors["bow_height"].set_acceleration(10)
+                    self.controllers.motors["bow_height"].set_deceleration(10)
                     self.controllers.motors["bow_height"].set_operating_mode(3) 
                     self.controllers.motors["bow_height"].set_motor_speed(600)
                     print("________", int(message))
@@ -90,10 +90,7 @@ class Main(threading.Thread):
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 print(e, repr(traceback.format_exception(exc_type, exc_value,exc_traceback)))
-
 main = Main()
-
-
 
 
 """
