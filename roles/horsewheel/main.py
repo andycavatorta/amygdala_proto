@@ -58,11 +58,6 @@ class Main(threading.Thread):
         self.start()
         self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
         #self.controllers.macros["bow_height"].go_to_absolute_position({"position":-40000, "speed":100})
-        self.controllers.motors["bow_height"].set_operating_mode(3) 
-        self.controllers.motors["bow_height"].set_motor_speed(300)
-        self.controllers.motors["bow_height"].set_acceleration(2000)
-        self.controllers.motors["bow_height"].set_deceleration(2000)
-
     def status_receiver(self, msg):
         print("status_receiver", msg)
     def network_message_handler(self,topic, message):
@@ -85,7 +80,10 @@ class Main(threading.Thread):
                 if topic == b"horsewheel_speed":
                     self.controllers.macros["bow_rotation"].set_speed(int(message))
                 if topic == b"horsewheel_lifter_position":
-
+                    self.controllers.motors["bow_height"].set_acceleration(2000)
+                    self.controllers.motors["bow_height"].set_deceleration(2000)
+                    self.controllers.motors["bow_height"].set_operating_mode(3) 
+                    self.controllers.motors["bow_height"].set_motor_speed(300)
                     print("________", int(message))
                     self.controllers.motors["bow_height"].go_to_absolute_position(int(-message))
                     #self.controllers.macros["bow_height"].go_to_absolute_position({"position":int(-message), "speed":50})
