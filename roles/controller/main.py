@@ -126,5 +126,5 @@ class MIDI(threading.Thread):
                         self.last_horsewheel_speed = horsewheel_speed
                         main.add_to_queue("horsewheel_speed", horsewheel_speed)
                 if midi_o.type == "control_change":
-                    main.add_to_queue("horsewheel_lifter_position", midi_o.value*2000)
+                    main.add_to_queue("horsewheel_lifter_position", midi_o.value*4000)
 midi = MIDI()
