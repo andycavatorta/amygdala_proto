@@ -29,18 +29,7 @@ class Roboteq_Data_Receiver(threading.Thread):
             #    pass
 
 roboteq_data_receiver = Roboteq_Data_Receiver()
-"""
-controllers = roboteq_command_wrapper.Controllers(
-    roboteq_data_receiver.add_to_queue, 
-    tb.status_receiver, 
-    tb.exception_receiver, 
-    {"bow":settings.Roboteq.BOARDS["bow"]},
-    {
-        "bow_height":settings.Roboteq.MOTORS["bow_height"],
-        "bow_rotation":settings.Roboteq.MOTORS["bow_rotation"],
-    }
-)
-"""
+
 class Main(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -69,7 +58,7 @@ class Main(threading.Thread):
         self.tb.subscribe_to_topic("horsewheel_lifter_home")
         self.tb.subscribe_to_topic("horsewheel_speed")
         self.tb.subscribe_to_topic("horsewheel_lifter_position")
-        self.tb.publish("transport_connected", True)
+        self.tb.publish("horsewheel_connected", True)
         self.start()
         self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
 
