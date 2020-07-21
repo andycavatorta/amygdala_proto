@@ -37,7 +37,6 @@ class Main(threading.Thread):
         self.horsewheel_lifter_home = False
         self.state = self.states.WAITING_FOR_CONNECTIONS
 
-
         self.queue = queue.Queue()
         self.tb.subscribe_to_topic("transport_connected")
         self.tb.subscribe_to_topic("horsewheel_connected")
@@ -63,6 +62,8 @@ class Main(threading.Thread):
         self.state = self.states.READY # just for testing
         while True:
             try:
+                #print("vvvvvvvvvvvvvv")
+                #print("--------------",self.tb.check_connections())
                 topic, message = self.queue.get(True)
                 if self.state == self.states.WAITING_FOR_CONNECTIONS:
                     if topic == "transport_present":
@@ -120,7 +121,7 @@ class MIDI(threading.Thread):
                     if midi_o.note > 59:
                         main.add_to_queue("horsewheel_slider_position", ((midi_o.note-48)*40000)+200000)
                 if midi_o.type == "pitchwheel":
-                    horsewheel_speed = int(midi_o.pitch/50)
+                    horsewheel_speed = int(midi_o.pitch/50)+70
                     if horsewheel_speed != self.last_horsewheel_speed:
                         self.last_horsewheel_speed = horsewheel_speed
                         main.add_to_queue("horsewheel_speed", horsewheel_speed)

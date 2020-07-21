@@ -51,13 +51,12 @@ class Main(threading.Thread):
                 "bow_rotation":settings.Roboteq.MOTORS["bow_rotation"],
             }
         )
-        self.tb.subscribe_to_topic("horsewheel_lifter_home")
+        #self.tb.subscribe_to_topic("horsewheel_lifter_home")
         self.tb.subscribe_to_topic("horsewheel_speed")
         self.tb.subscribe_to_topic("horsewheel_lifter_position")
         self.tb.publish("horsewheel_connected", True)
         self.start()
-        self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
-        #self.controllers.macros["bow_height"].go_to_absolute_position({"position":-40000, "speed":100})
+        #self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
     def status_receiver(self, msg):
         print("status_receiver", msg)
     def network_message_handler(self,topic, message):
