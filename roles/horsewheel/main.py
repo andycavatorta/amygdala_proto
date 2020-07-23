@@ -56,7 +56,13 @@ class Main(threading.Thread):
         self.tb.subscribe_to_topic("horsewheel_lifter_position")
         self.tb.publish("horsewheel_connected", True)
         self.start()
-        #self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
+
+    def macro_callback(self, motor_name, action, status):
+        print("macro_callback",motor_name, action, status)
+        if motor_name == "bow_height":
+            if action == 'go_to_limit_switch':
+                self.tb.publish("horsewheel_lifter_home", False)
+
     def status_receiver(self, msg):
         print("status_receiver", msg)
     def network_message_handler(self,topic, message):
@@ -75,7 +81,9 @@ class Main(threading.Thread):
                 topic, message = self.queue.get(True)
                 print(topic, message)
                 if topic == "horsewheel_lifter_home":
-                    self.tb.publish("horsewheel_lifter_home", True)
+                    self.controllers.macros["bow_height"].go_to_limit_switch({}, self.macro_callback)
+                    #self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
+                    #self.tb.publish("horsewheel_lifter_home", True)
                 if topic == b"horsewheel_speed":
                     self.controllers.macros["bow_rotation"].set_speed(int(message))
                 if topic == b"horsewheel_lifter_position":

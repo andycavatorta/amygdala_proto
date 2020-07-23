@@ -46,17 +46,10 @@ class Main(threading.Thread):
         self.tb.subscribe_to_topic("horsewheel_slider_home")
         self.tb.subscribe_to_topic("horsewheel_lifter_home")
 
-        #self.tb.publish("pitch_slider_home", "start")
-        #self.tb.publish("horsewheel_slider_home", "start")
-        #self.tb.publish("horsewheel_lifter_home", "start")
         self.start()
 
-    #def network_message_handler(topic, message):
-    #    print("network_message_handler",topic, message)
-    #    self.add_to_queue(topic, message)
     def network_message_handler(self, topic, message):
         self.add_to_queue(topic, message)
-
     def exception_handler(self, exception):
         print("exception_handler",exception)
     def network_status_change_handler(self, status, hostname):
@@ -76,6 +69,14 @@ class Main(threading.Thread):
                     self.tb.publish("pitch_slider_home", False)
                     self.tb.publish("horsewheel_slider_home", False)
                     self.tb.publish("horsewheel_lifter_home", False)
+        else: 
+            if hostname == "transport":
+                self.transport_connected = True
+                self.state = self.states.WAITING_FOR_CONNECTIONS
+            if hostname == "horsewheel":
+                self.horsewheel_connected = True
+                self.state = self.states.WAITING_FOR_CONNECTIONS
+        print("self.state=", self.state)
 
     def add_to_queue(self, topic, message):
         self.queue.put((topic, message))
@@ -88,27 +89,25 @@ class Main(threading.Thread):
                 print(">>>",topic, message)
 
                 if self.state == self.states.WAITING_FOR_HOMING:
-                    print("f")
-                    if topic == "pitch_slider_home":
-                        if message == True:
-                            self.pitch_slider_home = True
-                            if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
-                                self.state = self.states.READY
-                    if topic == "horsewheel_slider_home":
-                        if message == True:
-                            self.horsewheel_slider_home = True
-                            if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
-                                self.state = self.states.READY
-                    if topic == "horsewheel_lifter_home":
-                        if message == True:
-                            self.horsewheel_lifter_home = True
-                            if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
-                                self.state = self.states.READY
+                    if topic == b'pitch_slider_home':
+                        self.pitch_slider_home = True
+                        if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
+                            self.state = self.states.READY
+                    if topic == b'horsewheel_slider_home':
+                        self.horsewheel_slider_home = True
+                        if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
+                            self.state = self.states.READY
+                    if topic == b'horsewheel_lifter_home':
+                        self.horsewheel_lifter_home = True
+                        if self.horsewheel_slider_home and self.pitch_slider_home and self.horsewheel_lifter_home:
+                            self.state = self.states.READY
+
                 if self.state == self.states.READY:
                     if topic in ["pitch_slider_position","horsewheel_slider_position","horsewheel_speed","horsewheel_lifter_position"]:
                         print(topic, message)
                         self.tb.publish(topic, message)
-
+                print("self.state=", self.state)
+                
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 print(e, repr(traceback.format_exception(exc_type, exc_value,exc_traceback)))
