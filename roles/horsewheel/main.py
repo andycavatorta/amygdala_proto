@@ -51,7 +51,7 @@ class Main(threading.Thread):
                 "bow_rotation":settings.Roboteq.MOTORS["bow_rotation"],
             }
         )
-        #self.tb.subscribe_to_topic("horsewheel_lifter_home")
+        self.tb.subscribe_to_topic("horsewheel_lifter_home")
         self.tb.subscribe_to_topic("horsewheel_speed")
         self.tb.subscribe_to_topic("horsewheel_lifter_position")
         self.tb.publish("horsewheel_connected", True)
