@@ -73,8 +73,8 @@ class Main(threading.Thread):
         self.add_to_queue(topic, message)
     def exception_handler(self, exception):
         print("exception_handler",exception)
-    def network_status_change_handler(self,online_status):
-        print("network_status_change_handler",online_status)
+    def network_status_change_handler(self, status, hostname):
+        print("network_status_change_handler", status, hostname)
     def add_to_queue(self, topic, message):
         self.queue.put((topic, message))
 
