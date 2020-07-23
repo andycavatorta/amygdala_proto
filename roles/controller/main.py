@@ -87,7 +87,6 @@ class Main(threading.Thread):
                 #print("--------------",self.tb.check_connections(), self.state)
                 topic, message = self.queue.get(True)
                 print(">>>",topic, message)
-
                 if self.state == self.states.WAITING_FOR_HOMING:
                     if topic == b'pitch_slider_home':
                         self.pitch_slider_home = True
@@ -107,12 +106,10 @@ class Main(threading.Thread):
                         print(topic, message)
                         self.tb.publish(topic, message)
                 print("self.state=", self.state)
-                
+
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 print(e, repr(traceback.format_exception(exc_type, exc_value,exc_traceback)))
-
-
 main = Main()
 
 class MIDI(threading.Thread):
@@ -125,9 +122,9 @@ class MIDI(threading.Thread):
             for midi_o in inport:
                 if midi_o.type == "note_on":
                     if midi_o.note < 59:
-                        main.add_to_queue("pitch_slider_position", ((midi_o.note-48)*40000)+200000)
+                        main.add_to_queue("pitch_slider_position", ((midi_o.note-48)*240000)+200000)
                     if midi_o.note > 59:
-                        main.add_to_queue("horsewheel_slider_position", ((midi_o.note-48)*40000)+200000)
+                        main.add_to_queue("horsewheel_slider_position", ((midi_o.note-59)*90000)+20000)
                 if midi_o.type == "pitchwheel":
                     horsewheel_speed = int(midi_o.pitch/50)+70
                     if horsewheel_speed != self.last_horsewheel_speed:

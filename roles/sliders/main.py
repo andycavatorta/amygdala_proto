@@ -91,7 +91,7 @@ class Main(threading.Thread):
                 print(topic, message)
 
                 if topic == b"pitch_slider_position":
-                    self.controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":int(message), "speed":100})
+                    self.controllers.macros["pitch_slider"].add_to_queue("go_to_absolute_position", {"position":int(message), "speed":400})
 
                 if topic == b"horsewheel_slider_position":
                     self.controllers.macros["bow_position_slider"].add_to_queue("go_to_absolute_position", {"position":int(message), "speed":400})
