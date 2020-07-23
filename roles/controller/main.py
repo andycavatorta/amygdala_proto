@@ -16,6 +16,8 @@ from thirtybirds3 import thirtybirds
 # Main handles network send/recv and can see all other classes directly
 class Main(threading.Thread):
     def __init__(self):
+
+        
         threading.Thread.__init__(self)
         class States:
             WAITING_FOR_CONNECTIONS = "waiting_for_connections"
@@ -44,44 +46,49 @@ class Main(threading.Thread):
         self.tb.subscribe_to_topic("horsewheel_slider_home")
         self.tb.subscribe_to_topic("horsewheel_lifter_home")
 
-        self.tb.publish("pitch_slider_home", "start")
-        self.tb.publish("horsewheel_slider_home", "start")
-        self.tb.publish("horsewheel_lifter_home", "start")
+        #self.tb.publish("pitch_slider_home", "start")
+        #self.tb.publish("horsewheel_slider_home", "start")
+        #self.tb.publish("horsewheel_lifter_home", "start")
         self.start()
 
-    def network_message_handler(topic, message):
-        print("network_message_handler",topic, message)
+    #def network_message_handler(topic, message):
+    #    print("network_message_handler",topic, message)
+    #    self.add_to_queue(topic, message)
+    def network_message_handler(self, topic, message):
         self.add_to_queue(topic, message)
-    def exception_handler(exception):
+
+    def exception_handler(self, exception):
         print("exception_handler",exception)
-    def network_status_change_handler(online_status):
-        print("network_status_change_handler",online_status)
+    def network_status_change_handler(self, status, hostname):
+        print("network_status_change_handler", status, hostname)
+        if status == True: 
+            if hostname == "transport":
+                self.transport_connected = True
+                if self.transport_connected and self.horsewheel_connected:
+                    self.state = self.states.WAITING_FOR_HOMING
+                    self.tb.publish("pitch_slider_home", False)
+                    self.tb.publish("horsewheel_slider_home", False)
+                    self.tb.publish("horsewheel_lifter_home", False)
+            if hostname == "horsewheel":
+                self.horsewheel_connected = True
+                if self.transport_connected and self.horsewheel_connected:
+                    self.state = self.states.WAITING_FOR_HOMING
+                    self.tb.publish("pitch_slider_home", False)
+                    self.tb.publish("horsewheel_slider_home", False)
+                    self.tb.publish("horsewheel_lifter_home", False)
+
     def add_to_queue(self, topic, message):
         self.queue.put((topic, message))
     def run(self):
-        self.state = self.states.READY # just for testing
+        #self.state = self.states.READY # just for testing
         while True:
             try:
-                #print("vvvvvvvvvvvvvv")
-                #print("--------------",self.tb.check_connections())
+                #print("--------------",self.tb.check_connections(), self.state)
                 topic, message = self.queue.get(True)
-                if self.state == self.states.WAITING_FOR_CONNECTIONS:
-                    if topic == "transport_present":
-                        self.transport_connected = True
-                        if self.transport_connected and self.horsewheel_connected:
-                            self.state = self.states.WAITING_FOR_HOMING
-                            self.tb.publish("pitch_slider_home", False)
-                            self.tb.publish("horsewheel_slider_home", False)
-                            self.tb.publish("horsewheel_lifter_home", False)
-                    if topic == "horsewheel_present":
-                        self.horsewheel_connected = True
-                        if self.transport_connected and self.horsewheel_connected:
-                            self.state = self.states.WAITING_FOR_HOMING
-                            self.tb.publish("pitch_slider_home", False)
-                            self.tb.publish("horsewheel_slider_home", False)
-                            self.tb.publish("horsewheel_lifter_home", False)
+                print(">>>",topic, message)
 
                 if self.state == self.states.WAITING_FOR_HOMING:
+                    print("f")
                     if topic == "pitch_slider_home":
                         if message == True:
                             self.pitch_slider_home = True
@@ -105,6 +112,8 @@ class Main(threading.Thread):
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
                 print(e, repr(traceback.format_exception(exc_type, exc_value,exc_traceback)))
+
+
 main = Main()
 
 class MIDI(threading.Thread):

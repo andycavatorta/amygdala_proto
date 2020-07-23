@@ -61,6 +61,11 @@ class Main(threading.Thread):
         #self.controllers.macros["pitch_slider"].add_to_queue("go_to_limit_switch")
         #self.controllers.macros["bow_position_slider"].add_to_queue("go_to_limit_switch")
 
+    def macro_callback(self, motor_name, action, status):
+        print("macro_callback",motor_name, action, status)
+        self.tb.publish("pitch_slider_home", False)
+        self.tb.publish("horsewheel_slider_home", False)
+
     def status_receiver(self, msg):
         print("status_receiver", msg)
     def network_message_handler(self,topic, message):
@@ -84,6 +89,13 @@ class Main(threading.Thread):
 
                 if topic == b"horsewheel_slider_position":
                     self.controllers.macros["bow_position_slider"].add_to_queue("go_to_absolute_position", {"position":int(message), "speed":400})
+
+                if topic == b"pitch_slider_home":
+                    self.controllers.macros["pitch_slider"].go_to_limit_switch({}, self.macro_callback)
+
+                if topic == b"horsewheel_slider_home":
+                    self.controllers.macros["bow_position_slider"].go_to_limit_switch({}, self.macro_callback)
+
 
             except Exception as e:
                 exc_type, exc_value, exc_traceback = sys.exc_info()
