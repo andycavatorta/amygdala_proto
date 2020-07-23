@@ -80,7 +80,7 @@ class Main(threading.Thread):
             try:
                 topic, message = self.queue.get(True)
                 print(topic, message)
-                if topic == "horsewheel_lifter_home":
+                if topic == b"horsewheel_lifter_home":
                     self.controllers.macros["bow_height"].go_to_limit_switch({}, self.macro_callback)
                     #self.controllers.macros["bow_height"].add_to_queue("go_to_limit_switch")
                     #self.tb.publish("horsewheel_lifter_home", True)
